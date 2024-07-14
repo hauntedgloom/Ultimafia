@@ -14,28 +14,27 @@ module.exports = class Blade extends Item {
         action: {
           labels: ["kill", "blade"],
           item: this,
-          run: function(){
+          run: function () {
             if (!this.actor.alive || !this.target.alive) return;
 
-              // Stores their move selection
-              let userVote = this.meeting.votes[this.actor.id];
-              let enemyVote = this.meeting.votes[this.target.id];
+            // Stores their move selection
+            let userVote = this.meeting.votes[this.actor.id];
+            let enemyVote = this.meeting.votes[this.target.id];
 
-              // If neither the user or target voted then return
-              if (!userVote || !enemyVote) {
-                return;
-              }
-              else if(userVote == enemyVote){
-                this.game.queueAlert("You both killed each other.");
-              }
+            // If neither the user or target voted then return
+            if (!userVote || !enemyVote) {
+              return;
+            } else if (userVote == enemyVote) {
+              this.game.queueAlert("You both killed each other.");
             }
+          },
         },
-          inputType: "custom",
-          targets: ["Attack"],
-        },
-      };
-    }
-}
+        inputType: "custom",
+        targets: ["Attack"],
+      },
+    };
+  }
+};
 
 //Shows a list of moves samurai and their opponent can choose
 let moves = [
@@ -51,12 +50,12 @@ let moves = [
         labels: ["attack"],
         run: function () {
           this.game.queueAlert(`${this.actor.name} uses slash.`);
-          if(this.dominates()){
+          if (this.dominates()) {
             this.target.kill("basic", this.actor);
-            this.actor.item.drop()
+            this.actor.item.drop();
           }
         },
       },
     },
-  }
+  },
 ];
