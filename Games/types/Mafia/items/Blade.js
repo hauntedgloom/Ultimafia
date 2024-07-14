@@ -26,21 +26,17 @@ module.exports = class Blade extends Item {
 
   run() {
     if (!this.actor.alive || !this.target.alive) return;
-    console.log("Fight starting.");
 
     let turn = 1;
     // While the actor or target is alive
     while (this.actor.data.hp > 0 && this.target.data.hp > 0) {
       this.game.queueAlert(`Turn ${turn}`);
-      console.log("Turn established.");
       // Shows HP of Actor (No Dupliates)
       this.game.queueAlert(`${this.actor.name} HP: ${this.actor.data.hp}`);
-      console.log("Health established.");
 
       // Stores their move selection
       let userVote = this.meeting.votes[this.actor.id];
       let enemyVote = this.meeting.votes[this.target.id];
-      console.log("Move stored established.");
 
       // If neither the user or target voted then return
       if (!userVote || !enemyVote) {
@@ -55,11 +51,9 @@ module.exports = class Blade extends Item {
 
       // User goes first
       if (firstMove === 0) {
-        console.log("First move set");
         this.performAction(this.actor, this.target, userVote, attackMade);
         //Changes the state for attack made incase a defend happens.
         attackMade = true;
-        console.log("Second move set");
         this.performAction(this.target, this.actor, enemyVote, attackMade);
       } else {
         // Target goes first
