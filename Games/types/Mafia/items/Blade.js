@@ -88,7 +88,8 @@ module.exports = class Blade extends Item {
 
     //Sets win condition for samurai
     if (this.actor.role == "Samurai") {
-      this.actor.data.winner = this.actor.data.hp > 0 ? this.actor.name : this.target.name;
+      this.actor.data.winner =
+        this.actor.data.hp > 0 ? this.actor.name : this.target.name;
       this.game.queueAlert(`${this.actor.data.winner} has won the duel!`);
     }
 
@@ -130,7 +131,10 @@ let moves = [
           let damage = Math.floor(Math.random() * 4) + 10;
           this.target.data.hp -= damage;
           msg = `${this.actor.name} uses slash. ${this.target.name} loses ${
-            damage * (1 + this.actor.data.crit) * (1 - this.target.data.def / 100) + this.target.actor.atk
+            damage *
+              (1 + this.actor.data.crit) *
+              (1 - this.target.data.def / 100) +
+            this.target.actor.atk
           } HP!`;
         },
       },
