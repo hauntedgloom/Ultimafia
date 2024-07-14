@@ -39,7 +39,7 @@ module.exports = class Duel extends Card {
     };
 
     this.meetings = {
-      "Duel": {
+      Duel: {
         states: ["Night"],
         flags: ["voting"],
         action: {
