@@ -28,10 +28,6 @@ module.exports = class Duel extends Card {
         actionName: "Duel",
         states: ["Night"],
         flags: ["voting"],
-        shouldMeet: function () {
-          //If a battle happened, samurai can't pick again
-          return this.actor.data.hp == 150;
-        },
         action: {
           labels: ["duel"],
           run: function () {
