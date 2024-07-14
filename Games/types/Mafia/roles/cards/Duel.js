@@ -31,8 +31,8 @@ module.exports = class Duel extends Card {
         action: {
           labels: ["duel"],
           run: function () {
-            this.actor.holdItem("Blade");
-            this.target.holdItem("Blade");
+            //this.actor.holdItem("Blade");
+            //this.target.holdItem("Blade");
           },
         },
       },
