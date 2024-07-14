@@ -1,6 +1,7 @@
 const Item = require("../Item");
 
 module.exports = class Blade extends Item {
+  //SUCCESSFUL PRE STAT
   constructor() {
     super("Blade");
     this.reveal = true;

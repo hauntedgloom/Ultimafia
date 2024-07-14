@@ -1,6 +1,7 @@
 const Card = require("../../Card");
 const { PRIORITY_ITEM_GIVER_DEFAULT } = require("../../const/Priority");
 
+// SUCCESSFUL PRE-STAT
 module.exports = class GiveBlade extends Card {
   constructor(role) {
     super(role);
