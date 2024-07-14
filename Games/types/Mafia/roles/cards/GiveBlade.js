@@ -5,7 +5,7 @@ module.exports = class GiveBlade extends Card {
   constructor(role) {
     super(role);
 
-    this.actor.winner = "";
+    this.actor.data.winner = "";
     this.actor.data.hp = 150;
     this.target.data.hp = 150;
 
