@@ -4,24 +4,23 @@ module.exports = class Duel extends Card {
   constructor(role) {
     super(role);
 
-    const { actor, target } = this;
-
-    actor.winner = "";
+    // Setting winner
+    this.actor.data.winner = "";
 
     // Setting hp
-    actor.hp = 150;
-    target.hp = 150;
+    this.actor.data.hp = 150;
+    this.target.data.hp = 150;
 
     // Setting defense
-    actor.def = 10;
-    target.def = 10;
+    this.actor.data.def = 10;
+    this.target.data.def = 10;
 
-    actor.atk = 15;
-    target.atk = 15;
+    this.actor.data.atk = 15;
+    this.target.data.atk = 15;
 
     // Setting crit
-    actor.crit = 1.0;
-    target.crit = 1.0;
+    this.actor.data.crit = 1.0;
+    this.target.data.crit = 1.0;
 
     this.listeners = {
       state: function (stateInfo) {
@@ -51,7 +50,7 @@ module.exports = class Duel extends Card {
           },
           shouldMeet: function () {
             //If a battle happened, samurai can't pick again
-            return this.actor.hp == 150 && this.target.hp == 150;
+            return this.actor.data.hp == 150;
           },
         },
       },

@@ -24,7 +24,7 @@ module.exports = class Blade extends Item {
         inputType: "custom",
         targets: ["Attack", "Defend", "Charge"],
         shouldMeet: function () {
-          return this.actor.hp == 150 && this.target.hp == 150;
+          return this.actor.data.hp == 150 && this.target.data.hp == 150;
         },
         performAction: this.performAction.bind(this),
         run: this.run.bind(this),
@@ -38,12 +38,12 @@ module.exports = class Blade extends Item {
     let turn = 1;
 
     // While the actor or target is alive
-    while (this.actor.hp > 0 && this.target.hp > 0) {
+    while (this.actor.data.hp > 0 && this.target.data.hp > 0) {
       this.game.queueAlert(`Turn ${turn}`);
       // Shows HP of Actor
-      this.game.queueAlert(`${this.actor.name} HP: ${this.actor.hp}`);
+      this.game.queueAlert(`${this.actor.name} HP: ${this.actor.data.hp}`);
       // Shows HP of Target
-      this.game.queueAlert(`${this.target.name} HP: ${this.target.hp}`);
+      this.game.queueAlert(`${this.target.name} HP: ${this.target.data.hp}`);
 
       // Stores their move selection
       let userVote = this.meeting.votes[actor.id];
@@ -70,19 +70,19 @@ module.exports = class Blade extends Item {
 
       let customMessage = "";
       if (this.actor.role == "Samurai") {
-        if (this.actor.hp <= 50 && this.actor.hp >= 30 && !wellDoneSent) {
+        if (this.actor.data.hp <= 50 && this.actor.data.hp >= 30 && !wellDoneSent) {
           customMessage = `You have done well so far... But that was just practice!`;
           this.game.queueAlert(customMessage);
           wellDoneSent = true;
         } else if (
-          this.actor.hp <= 30 &&
-          this.actor.hp >= 20 &&
+          this.actor.data.hp <= 30 &&
+          this.actor.data.hp >= 20 &&
           !criticalSent
         ) {
           customMessage = "No more games, to the death!";
           this.game.queueAlert(customMessage);
           criticalSent = true;
-        } else if (this.actor.hp <= 0 && !deathSent) {
+        } else if (this.actor.data.hp <= 0 && !deathSent) {
           customMessage = "I can't fall into the hands of an enemy... So I...";
           this.game.queueAlert(customMessage);
           customMessage = "Fulfill a samurai's final duty...";
@@ -115,8 +115,8 @@ module.exports = class Blade extends Item {
       turn++;
     }
     // If the actor or target died, set the winner
-    this.actor.winner = actor.hp > 0 ? this.actor.name : this.target.name;
-    this.game.queueAlert(`${this.actor.winner} has won the duel!`);
+    this.actor.data.winner = this.actor.data.hp > 0 ? this.actor.name : this.target.name;
+    this.game.queueAlert(`${this.actor.data.winner} has won the duel!`);
 
     // Remove items (if necessary)
     this.actor.item.drop();
@@ -156,8 +156,8 @@ let moves = [
           let damage = Math.floor(Math.random() * 4) + 10;
           this.target.hp -= damage;
           msg = `${this.actor.name} uses slash. ${this.target.name} loses ${
-            damage * (1 + this.actor.crit) * (1 - this.target.def / 100) +
-            this.actor.atk
+            damage * (1 + this.actor.data.crit) * (1 - this.target.data.def / 100) +
+            this.actor.data.atk
           } HP!`;
         },
       },
@@ -175,7 +175,7 @@ let moves = [
         labels: ["defend"],
         run: function () {
           let damageBlocked = Math.floor(Math.random() * 6) * 10;
-          this.actor.def += damageBlocked;
+          this.actor.data.def += damageBlocked;
           msg = `${this.actor.name} uses defend! Defense is increased.`;
         },
       },
@@ -192,7 +192,7 @@ let moves = [
       action: {
         labels: ["charge"],
         run: function () {
-          this.actor.crit += 0.25;
+          this.actor.data.crit += 0.25;
           msg = `${this.actor.name} uses charge! Attack power increased.`;
         },
       },
