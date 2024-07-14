@@ -25,11 +25,6 @@ module.exports = class Blade extends Item {
   }
 
   run() {
-    this.actor.data.hp = 150;
-    this.actor.data.atk = 15;
-    this.actor.data.def = 10;
-    this.actor.data.crit = 1.0;
-    this.actor.data.winner = "";
 
     if (!this.actor.alive || !this.target.alive) return;
     console.log("Fight starting.");
