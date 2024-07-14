@@ -25,16 +25,16 @@ module.exports = class Blade extends Item {
 
 //Shows a list of moves samurai and their opponent can choose
 let attack = {
-     actionName: "Attack",
-      // Can only be done in the day
-      states: ["Day"],
-      flags: ["voting", "instant", "noVeg"],
-      action: {
-        labels: ["kill", "attack"],
-        run: function () {
-          this.game.queueAlert(`${this.actor.name} uses slash.`);
-          this.actor.item.drop();
-          this.target.kill("basic", this.actor);
-        },
-      },
+  actionName: "Attack",
+  // Can only be done in the day
+  states: ["Day"],
+  flags: ["voting", "instant", "noVeg"],
+  action: {
+    labels: ["kill", "attack"],
+    run: function () {
+      this.game.queueAlert(`${this.actor.name} uses slash.`);
+      this.actor.item.drop();
+      this.target.kill("basic", this.actor);
+    },
+  },
 };
