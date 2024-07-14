@@ -921,6 +921,15 @@ const roleData = {
         "When a Saint is condemned, All Village Aligned players die.",
       ],
     },
+    Samurai: {
+      alignment: "Village",
+      newlyAdded: true,
+      description: [
+        "Picks a player at night to enage in a turn based duel during the day once per game.",
+        "Both the samurai and the target has the option to use attack",
+        "Attack - Deals a certain amount of damage.",
+      ],
+    },
     Seer: {
       alignment: "Village",
       category: "Essential",
@@ -2289,17 +2298,6 @@ const roleData = {
         "A polarised player visiting another polarised player will kill both of them.",
         //"If visited by a Penguin, will eat it.",
         "Wins if four polarised players die or if majority is attained.",
-      ],
-    },
-    Samurai: {
-      alignment: "Independent",
-      description: [
-        "Picks a player at night to enage in a turn based duel during the day once per game.",
-        "Both the samurai and the target has the option to use the following moves: attack, defend, parry and charge.",
-        "Attack - Deals a certain amount of damage.",
-        "Defend - Raises defense of the player.",
-        "Charge - Raises the attack power of the player.",
-        "Wins if they win their duel.",
       ],
     },
     Snowman: {
