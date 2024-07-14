@@ -122,10 +122,10 @@ module.exports = class Blade extends Item {
     }
 
     //Sets win condition for samurai
-    if(this.actor.role == "Samurai"){
-    this.actor.data.winner =
-      this.actor.data.hp > 0 ? this.actor.name : this.target.name;
-    this.game.queueAlert(`${this.actor.data.winner} has won the duel!`);
+    if (this.actor.role == "Samurai") {
+      this.actor.data.winner =
+        this.actor.data.hp > 0 ? this.actor.name : this.target.name;
+      this.game.queueAlert(`${this.actor.data.winner} has won the duel!`);
     }
 
     // Remove items from both players
