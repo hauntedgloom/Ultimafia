@@ -31,7 +31,7 @@ module.exports = class Duel extends Card {
         this.player.queueAlert(
           "A samurai has come to town to prove their worth! Losing against them could bring disastrous consequences…"
         );
-      }
+      },
     };
 
     this.meetings = {
