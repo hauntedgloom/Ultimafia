@@ -15,12 +15,12 @@ module.exports = class Blade extends Item {
           labels: ["kill", "blade"],
           item: this,
           run: function () {
-              moves.Attack.run();
-            }
+            moves.Attack.run();
           },
         },
-      }
-    }
+      },
+    };
+  }
 };
 
 //Shows a list of moves samurai and their opponent can choose
