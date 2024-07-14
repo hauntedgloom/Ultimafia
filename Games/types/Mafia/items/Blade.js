@@ -7,6 +7,11 @@ module.exports = class Blade extends Item {
     this.reveal = true;
     this.meetingName = "Use Move";
 
+    //Setting wincon variable
+    if (this.actor.role == "Samurai"){
+      this.actor.data.winner = "";
+    }
+
     //Setting it to actor only so no duplicates.
     this.actor.data.hp = 150;
     this.actor.data.atk = 15;
