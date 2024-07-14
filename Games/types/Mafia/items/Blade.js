@@ -10,24 +10,15 @@ module.exports = class Blade extends Item {
       [meetingName]: {
         actionName: "Battle",
         states: ["Day"],
-        flags: [
-          "group",
-          "voting",
-          "anonymous",
-          "mustAct",
-          "instant",
-          "votesInvisible",
-          "noUnvote",
-          "multiSplit",
-          "hideAfterVote",
-        ],
-        inputType: "custom",
-        targets: ["Attack", "Defend", "Charge"],
-        shouldMeet: function () {
-          return this.actor.data.hp == 150 && this.target.data.hp == 150;
+        flags: ["voting", "instant", "noVeg"],
+        action: { 
+          labels: ['blade', 'kill'],
+          item: this,
+          run: this.run.bind(this)
         },
         performAction: this.performAction.bind(this),
-        run: this.run.bind(this),
+        inputType: "custom",
+        targets: ["Attack", "Defend", "Charge"],
       },
     };
   }
@@ -119,6 +110,13 @@ module.exports = class Blade extends Item {
       turn++;
     }
     // If the actor or target died, set the winner
+    if (this.actor.data.hp > 0){
+      this.target.kill("basic", this.actor);
+    }
+    else{
+      this.actor.kill("basic", this.target);
+    }
+
     this.actor.data.winner =
       this.actor.data.hp > 0 ? this.actor.name : this.target.name;
     this.game.queueAlert(`${this.actor.data.winner} has won the duel!`);
