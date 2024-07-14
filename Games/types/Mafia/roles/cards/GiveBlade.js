@@ -14,7 +14,6 @@ module.exports = class GiveBlade extends Card {
           priority: PRIORITY_ITEM_GIVER_DEFAULT,
           run: function () {
             this.target.holdItem("Blade");
-            this.actor.holdItem("Blade");
           },
         },
       },

@@ -45,7 +45,6 @@ let moves = [
       // Can only be done in the day
       states: ["Day"],
       flags: ["voting", "instant", "noVeg"],
-      msg: "",
       action: {
         labels: ["attack"],
         run: function () {
