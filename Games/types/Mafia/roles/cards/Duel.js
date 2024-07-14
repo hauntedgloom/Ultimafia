@@ -24,7 +24,7 @@ module.exports = class Duel extends Card {
     this.target.data.crit = 1.0;*/
 
     this.meetings = {
-      "Duel": {
+      Duel: {
         actionName: "Duel",
         states: ["Night"],
         flags: ["voting"],
