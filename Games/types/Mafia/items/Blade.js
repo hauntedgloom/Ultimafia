@@ -70,7 +70,11 @@ module.exports = class Blade extends Item {
 
       let customMessage = "";
       if (this.actor.role == "Samurai") {
-        if (this.actor.data.hp <= 50 && this.actor.data.hp >= 30 && !wellDoneSent) {
+        if (
+          this.actor.data.hp <= 50 &&
+          this.actor.data.hp >= 30 &&
+          !wellDoneSent
+        ) {
           customMessage = `You have done well so far... But that was just practice!`;
           this.game.queueAlert(customMessage);
           wellDoneSent = true;
@@ -115,7 +119,8 @@ module.exports = class Blade extends Item {
       turn++;
     }
     // If the actor or target died, set the winner
-    this.actor.data.winner = this.actor.data.hp > 0 ? this.actor.name : this.target.name;
+    this.actor.data.winner =
+      this.actor.data.hp > 0 ? this.actor.name : this.target.name;
     this.game.queueAlert(`${this.actor.data.winner} has won the duel!`);
 
     // Remove items (if necessary)
@@ -156,7 +161,9 @@ let moves = [
           let damage = Math.floor(Math.random() * 4) + 10;
           this.target.hp -= damage;
           msg = `${this.actor.name} uses slash. ${this.target.name} loses ${
-            damage * (1 + this.actor.data.crit) * (1 - this.target.data.def / 100) +
+            damage *
+              (1 + this.actor.data.crit) *
+              (1 - this.target.data.def / 100) +
             this.actor.data.atk
           } HP!`;
         },
