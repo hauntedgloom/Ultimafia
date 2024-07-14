@@ -1,23 +1,19 @@
 const Item = require("../Item");
 
+// Setting global stats for the player and target
+let actorHP = 150;
+let targetHP = 150;
+let actorATK = 15;
+let actorDEF = 10;
+let actorCRIT = 1.0;
+let targetDEF = 10;
+
 module.exports = class Blade extends Item {
   //SUCCESSFUL PRE STAT
   constructor() {
     super("Blade");
     this.reveal = true;
     this.meetingName = "Use Move";
-
-    /*
-    //Setting wincon variable
-    if (this.actor.role == "Samurai") {
-      this.actor.data.winner = "";
-    }
-
-    //Setting it to actor only so no duplicates.
-    this.actor.data.hp = 150;
-    this.actor.data.atk = 15;
-    this.actor.data.def = 10;
-    this.actor.data.crit = 1.0; */
 
     this.meetings = {
       [this.meetingName]: {
@@ -40,61 +36,19 @@ module.exports = class Blade extends Item {
     if (!this.actor.alive || !this.target.alive) return;
 
     let turn = 1;
-
     // While the actor or target is alive
-    while (this.actor.data.hp > 0 && this.target.data.hp > 0) {
+    while (actorHP > 0 && targetHP > 0) {
       this.game.queueAlert(`Turn ${turn}`);
       // Shows HP of Actor (No Dupliates)
-      this.game.queueAlert(`${this.actor.name} HP: ${this.actor.data.hp}`);
+      this.game.queueAlert(`${this.actor.name} HP: ${actorHP}`);
 
       // Stores their move selection
-      let userVote = this.meeting.votes[actor.id];
-      let enemyVote = this.meeting.votes[target.id];
+      let userVote = this.meeting.votes[this.actor.id];
+      let enemyVote = this.meeting.votes[this.target.id];
 
       // If neither the user or target voted then return
       if (!userVote || !enemyVote) {
         return;
-      }
-
-      // Custom messages for the battle
-      if (turn == 1) {
-        if (this.actor.role == "Samurai") {
-          this.game.queueAlert(`${this.actor} unsheathes katana!`);
-        } else {
-          this.game.queueAlert(`${this.target} eyes glow red.`);
-        }
-      }
-
-      //Sends a message at critical moments of the fight
-      let wellDoneSent = false;
-      let criticalSent = false;
-      let deathSent = false;
-
-      let customMessage = "";
-      if (this.actor.role == "Samurai") {
-        if (
-          this.actor.data.hp <= 50 &&
-          this.actor.data.hp >= 30 &&
-          !wellDoneSent
-        ) {
-          customMessage = `You have done well so far... But that was just practice!`;
-          this.game.queueAlert(customMessage);
-          wellDoneSent = true;
-        } else if (
-          this.actor.data.hp <= 30 &&
-          this.actor.data.hp >= 20 &&
-          !criticalSent
-        ) {
-          customMessage = "No more games, to the death!";
-          this.game.queueAlert(customMessage);
-          criticalSent = true;
-        } else if (this.actor.data.hp <= 0 && !deathSent) {
-          customMessage = "I can't fall into the hands of an enemy... So I...";
-          this.game.queueAlert(customMessage);
-          customMessage = "Fulfill a samurai's final duty...";
-          this.game.queueAlert(customMessage);
-          deathSent = true;
-        }
       }
 
       // Set a state for deciding if an attack has been made
@@ -105,23 +59,24 @@ module.exports = class Blade extends Item {
 
       // User goes first
       if (firstMove === 0) {
-        this.performAction(actor, target, userVote, attackMade);
+        this.performAction(this.actor, this.target, userVote, attackMade);
         //Changes the state for attack made incase a defend happens.
         attackMade = true;
-        this.performAction(target, actor, enemyVote, attackMade);
+        this.performAction(this.target, this.actor, enemyVote, attackMade);
       } else {
         // Target goes first
-        this.performAction(target, actor, enemyVote, attackMade);
+        this.performAction(this.target, this.actor, enemyVote, attackMade);
 
         //Changes the state for attack made incase a defend happens
         attackMade = true;
-        this.performAction(actor, target, userVote, attackMade);
+        this.performAction(this.actor, this.target, userVote, attackMade);
       }
       //Increase the turn after actions have been used
       turn++;
     }
+
     // If the actor or target died, set the winner
-    if (this.actor.data.hp > 0) {
+    if (actorHP > 0) {
       this.target.kill("basic", this.actor);
     } else {
       this.actor.kill("basic", this.target);
@@ -130,7 +85,7 @@ module.exports = class Blade extends Item {
     //Sets win condition for samurai
     if (this.actor.role == "Samurai") {
       this.actor.data.winner =
-        this.actor.data.hp > 0 ? this.actor.name : this.target.name;
+        actorHP > 0 ? this.actor.name : this.target.name;
       this.game.queueAlert(`${this.actor.data.winner} has won the duel!`);
     }
 
@@ -170,12 +125,9 @@ let moves = [
         labels: ["attack"],
         run: function () {
           let damage = Math.floor(Math.random() * 4) + 10;
-          this.target.hp -= damage;
+          targetHP -= damage;
           msg = `${this.actor.name} uses slash. ${this.target.name} loses ${
-            damage *
-              (1 + this.actor.data.crit) *
-              (1 - this.target.data.def / 100) +
-            this.actor.data.atk
+            damage * (1 + actorCRIT) * (1 - targetDEF / 100) + actorATK
           } HP!`;
         },
       },
@@ -193,7 +145,7 @@ let moves = [
         labels: ["defend"],
         run: function () {
           let damageBlocked = Math.floor(Math.random() * 6) * 10;
-          this.actor.data.def += damageBlocked;
+          actorDEF += damageBlocked;
           msg = `${this.actor.name} uses defend! Defense is increased.`;
         },
       },
@@ -210,7 +162,7 @@ let moves = [
       action: {
         labels: ["charge"],
         run: function () {
-          this.actor.data.crit += 0.25;
+          actorCRIT += 0.25;
           msg = `${this.actor.name} uses charge! Attack power increased.`;
         },
       },
