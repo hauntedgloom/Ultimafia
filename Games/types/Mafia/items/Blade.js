@@ -84,8 +84,7 @@ module.exports = class Blade extends Item {
 
     //Sets win condition for samurai
     if (this.actor.role == "Samurai") {
-      this.actor.data.winner =
-        actorHP > 0 ? this.actor.name : this.target.name;
+      this.actor.data.winner = actorHP > 0 ? this.actor.name : this.target.name;
       this.game.queueAlert(`${this.actor.data.winner} has won the duel!`);
     }
 
