@@ -25,7 +25,6 @@ module.exports = class Blade extends Item {
   }
 
   run() {
-
     if (!this.actor.alive || !this.target.alive) return;
     console.log("Fight starting.");
 
