@@ -23,12 +23,12 @@ module.exports = class GiveBlade extends Card {
         states: ["Night"],
         flags: ["voting"],
         action: {
-          labels: ["giveItem", "blade"],
+          labels: ["giveItem", "gun"],
           priority: PRIORITY_ITEM_GIVER_DEFAULT,
           run: function () {
             // Gives a blade to the samurai and their opponent
-            this.actor.holdItem("Blade");
-            this.target.holdItem("Blade");
+            this.actor.holdItem("Gun");
+            this.target.holdItem("Gun");
           },
         },
       },
