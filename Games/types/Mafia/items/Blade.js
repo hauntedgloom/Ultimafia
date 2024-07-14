@@ -7,6 +7,7 @@ module.exports = class Blade extends Item {
     this.reveal = true;
     this.meetingName = "Use Move";
 
+    /*
     //Setting wincon variable
     if (this.actor.role == "Samurai") {
       this.actor.data.winner = "";
@@ -16,7 +17,7 @@ module.exports = class Blade extends Item {
     this.actor.data.hp = 150;
     this.actor.data.atk = 15;
     this.actor.data.def = 10;
-    this.actor.data.crit = 1.0;
+    this.actor.data.crit = 1.0; */
 
     this.meetings = {
       [this.meetingName]: {
