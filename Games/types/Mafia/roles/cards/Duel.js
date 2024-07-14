@@ -4,6 +4,7 @@ module.exports = class Duel extends Card {
   constructor(role) {
     super(role);
 
+    /*
     // Setting winner
     this.actor.data.winner = "";
 
@@ -20,26 +21,11 @@ module.exports = class Duel extends Card {
 
     // Setting crit
     this.actor.data.crit = 1.0;
-    this.target.data.crit = 1.0;
-
-    this.listeners = {
-      state: function (stateInfo) {
-        if (!this.player.alive) {
-          return;
-        }
-
-        if (!stateInfo.name.match(/Day/)) {
-          return;
-        }
-
-        this.game.queueAlert(
-          "A samurai has come to town to prove their worth! Losing against them could bring disastrous consequences…"
-        );
-      },
-    };
+    this.target.data.crit = 1.0;*/
 
     this.meetings = {
-      Duel: {
+      "Duel": {
+        actionName: "Duel",
         states: ["Night"],
         flags: ["voting"],
         action: {
