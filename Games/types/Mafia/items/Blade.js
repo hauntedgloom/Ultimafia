@@ -56,29 +56,36 @@ module.exports = class Blade extends Item {
 
       // Custom messages for the battle
       if (turn == 1) {
-        this.game.queueAlert(`${this.actor} unsheathes katana!`);
-        this.game.queueAlert(`${this.target} eyes glow red.`);
+        if (this.actor.role == 'Samurai'){
+          this.game.queueAlert(`${this.actor} unsheathes katana!`);
+        }
+        else{
+          this.game.queueAlert(`${this.target} eyes glow red.`);
+        }
       }
 
+      //Sends a message at critical moments of the fight
       let wellDoneSent = false;
       let criticalSent = false;
       let deathSent = false;
 
       let customMessage = "";
-      if (this.actor.hp <= 50 && this.actor.hp >= 30 && !wellDoneSent) {
-        customMessage = `You have done well so far... But that was just practice!`;
-        this.game.queueAlert(customMessage);
-        wellDoneSent = true;
-      } else if (this.actor.hp <= 30 && this.actor.hp >= 20 && !criticalSent) {
-        customMessage = "No more games, to the death!";
-        this.game.queueAlert(customMessage);
-        criticalSent = true;
-      } else if (this.actor.hp <= 0 && !deathSent) {
-        customMessage = "I can't fall into the hands of an enemy... So I...";
-        this.game.queueAlert(customMessage);
-        customMessage = "Fulfill a samurai's final duty...";
-        this.game.queueAlert(customMessage);
-        deathSent = true;
+      if (this.actor.role == "Samurai"){
+        if ((this.actor.hp <= 50 && this.actor.hp >= 30) && !wellDoneSent) {
+          customMessage = `You have done well so far... But that was just practice!`;
+          this.game.queueAlert(customMessage);
+          wellDoneSent = true;
+        } else if ((this.actor.hp <= 30 && this.actor.hp >= 20) && !criticalSent) {
+          customMessage = "No more games, to the death!";
+          this.game.queueAlert(customMessage);
+          criticalSent = true;
+        } else if (this.actor.hp <= 0 && !deathSent) {
+          customMessage = "I can't fall into the hands of an enemy... So I...";
+          this.game.queueAlert(customMessage);
+          customMessage = "Fulfill a samurai's final duty...";
+          this.game.queueAlert(customMessage);
+          deathSent = true;
+        }
       }
 
       // Set a state for deciding if an attack has been made
