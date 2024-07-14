@@ -56,7 +56,6 @@ module.exports = {
     Courier: "Mailman",
     Hoaxer: "Mailman",
     Crafter: "Santa",
-    Samurai: "Villager",
     Stalwart: "Villager",
     Gallis: "Villager",
     Scapegoat: "Villager",
