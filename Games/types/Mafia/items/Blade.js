@@ -1,13 +1,5 @@
 const Item = require("../Item");
 
-// Setting global stats for the player and target
-let actorHP = 150;
-let targetHP = 150;
-let actorATK = 15;
-let actorDEF = 10;
-let actorCRIT = 1.0;
-let targetDEF = 10;
-
 module.exports = class Blade extends Item {
   //SUCCESSFUL PRE STAT
   constructor() {
@@ -33,16 +25,22 @@ module.exports = class Blade extends Item {
   }
 
   run() {
+    this.actor.data.hp = 150;
+    this.actor.data.atk = 15;
+    this.actor.data.def = 10;
+    this.actor.data.crit = 1.0;
+    this.actor.data.winner = "";
+
     if (!this.actor.alive || !this.target.alive) return;
     console.log("Fight starting.");
 
     let turn = 1;
     // While the actor or target is alive
-    while (actorHP > 0 && targetHP > 0) {
+    while (this.actor.data.hp > 0 && this.target.data.hp > 0) {
       this.game.queueAlert(`Turn ${turn}`);
       console.log("Turn established.");
       // Shows HP of Actor (No Dupliates)
-      this.game.queueAlert(`${this.actor.name} HP: ${actorHP}`);
+      this.game.queueAlert(`${this.actor.name} HP: ${this.actor.data.hp}`);
       console.log("Health established.");
 
       // Stores their move selection
@@ -90,7 +88,7 @@ module.exports = class Blade extends Item {
 
     //Sets win condition for samurai
     if (this.actor.role == "Samurai") {
-      this.actor.data.winner = actorHP > 0 ? this.actor.name : this.target.name;
+      this.actor.data.winner = this.actor.data.hp > 0 ? this.actor.name : this.target.name;
       this.game.queueAlert(`${this.actor.data.winner} has won the duel!`);
     }
 
@@ -130,9 +128,9 @@ let moves = [
         labels: ["attack"],
         run: function () {
           let damage = Math.floor(Math.random() * 4) + 10;
-          targetHP -= damage;
+          this.target.data.hp -= damage;
           msg = `${this.actor.name} uses slash. ${this.target.name} loses ${
-            damage * (1 + actorCRIT) * (1 - targetDEF / 100) + actorATK
+            damage * (1 + this.actor.data.crit) * (1 - this.target.data.def / 100) + this.target.actor.atk
           } HP!`;
         },
       },
@@ -150,7 +148,7 @@ let moves = [
         labels: ["defend"],
         run: function () {
           let damageBlocked = Math.floor(Math.random() * 6) * 10;
-          actorDEF += damageBlocked;
+          this.actor.data.def += damageBlocked;
           msg = `${this.actor.name} uses defend! Defense is increased.`;
         },
       },
@@ -167,7 +165,7 @@ let moves = [
       action: {
         labels: ["charge"],
         run: function () {
-          actorCRIT += 0.25;
+          this.actor.data.crit += 0.25;
           msg = `${this.actor.name} uses charge! Attack power increased.`;
         },
       },
