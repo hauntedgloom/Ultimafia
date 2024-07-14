@@ -16,25 +16,13 @@ module.exports = class Blade extends Item {
           item: this,
           run: function () {
             if (!this.actor.alive || !this.target.alive) return;
-
-            // Stores their move selection
-            let userVote = this.meeting.votes[this.actor.id];
-            let enemyVote = this.meeting.votes[this.target.id];
-
-            // If neither the user or target voted then return
-            if (!userVote || !enemyVote) {
-              return;
-            } else if (userVote == enemyVote) {
-              this.game.queueAlert("You both killed each other.");
+              moves.Attack.run();
             }
           },
         },
-        inputType: "custom",
-        targets: ["Attack"],
-      },
-    };
-  }
-};
+      }
+    }
+  };
 
 //Shows a list of moves samurai and their opponent can choose
 let moves = [
