@@ -16,13 +16,13 @@ module.exports = class Blade extends Item {
           item: this,
           run: function () {
             if (!this.actor.alive || !this.target.alive) return;
-              moves.Attack.run();
-            }
+            moves.Attack.run();
           },
         },
-      }
-    }
-  };
+      },
+    };
+  }
+};
 
 //Shows a list of moves samurai and their opponent can choose
 let moves = [
