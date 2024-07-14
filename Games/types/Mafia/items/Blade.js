@@ -46,7 +46,7 @@ let moves = [
       states: ["Day"],
       flags: ["voting", "instant", "noVeg"],
       action: {
-        labels: ["attack"],
+        labels: ["kill", "attack"],
         run: function () {
           this.game.queueAlert(`${this.actor.name} uses slash.`);
           if (this.dominates()) {
