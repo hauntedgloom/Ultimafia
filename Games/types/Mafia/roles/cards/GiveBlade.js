@@ -7,17 +7,6 @@ module.exports = class GiveBlade extends Card {
     super(role);
 
     this.actor.data.winner = "";
-    this.actor.data.hp = 150;
-    this.target.data.hp = 150;
-
-    this.actor.data.atk = 15;
-    this.target.data.atk = 15;
-
-    this.actor.data.def = 10;
-    this.target.data.def = 10;
-
-    this.actor.data.crit = 1.0;
-    this.target.data.crit = 1.0;
 
     this.meetings = {
       "Give Blade": {

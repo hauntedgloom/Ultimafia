@@ -7,6 +7,12 @@ module.exports = class Blade extends Item {
     this.reveal = true;
     this.meetingName = "Use Move";
 
+    //Setting it to actor only so no duplicates.
+    this.actor.data.hp = 150;
+    this.actor.data.atk = 15;
+    this.actor.data.def = 10;
+    this.actor.data.crit = 1.0;
+
     this.meetings = {
       [this.meetingName]: {
         actionName: "Battle",
@@ -32,10 +38,8 @@ module.exports = class Blade extends Item {
     // While the actor or target is alive
     while (this.actor.data.hp > 0 && this.target.data.hp > 0) {
       this.game.queueAlert(`Turn ${turn}`);
-      // Shows HP of Actor
+      // Shows HP of Actor (No Dupliates)
       this.game.queueAlert(`${this.actor.name} HP: ${this.actor.data.hp}`);
-      // Shows HP of Target
-      this.game.queueAlert(`${this.target.name} HP: ${this.target.data.hp}`);
 
       // Stores their move selection
       let userVote = this.meeting.votes[actor.id];
@@ -117,15 +121,18 @@ module.exports = class Blade extends Item {
       this.actor.kill("basic", this.target);
     }
 
+    //Sets win condition for samurai
+    if(this.actor.role == "Samurai"){
     this.actor.data.winner =
       this.actor.data.hp > 0 ? this.actor.name : this.target.name;
     this.game.queueAlert(`${this.actor.data.winner} has won the duel!`);
+    }
 
-    // Remove items (if necessary)
+    // Remove items from both players
     this.actor.item.drop();
-    this.target.item.drop();
   }
 
+  // Function for handling both players actions
   performAction(user, enemy, choice, attackMade) {
     let selection = moves.find((move) => move[choice]);
     if (selection) {
