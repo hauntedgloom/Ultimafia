@@ -19,6 +19,7 @@ module.exports = {
     Bride: "Suitress",
     "Killer Bee": "Terrorist",
     Mortician: "Coroner",
+    Samurai: "Stalwart",
     Ghoul: "Coward",
     Enchantress: "Gemcutter",
     Associate: "Gunrunner",
