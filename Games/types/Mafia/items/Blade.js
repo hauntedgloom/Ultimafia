@@ -15,8 +15,8 @@ module.exports = class Blade extends Item {
           labels: ["kill", "blade"],
           item: this,
           run: function () {
-            if (!this.actor.alive || !this.target.alive) return;
-            moves.Attack.run();
+              moves.Attack.run();
+            }
           },
         },
       },
