@@ -56,10 +56,9 @@ module.exports = class Blade extends Item {
 
       // Custom messages for the battle
       if (turn == 1) {
-        if (this.actor.role == 'Samurai'){
+        if (this.actor.role == "Samurai") {
           this.game.queueAlert(`${this.actor} unsheathes katana!`);
-        }
-        else{
+        } else {
           this.game.queueAlert(`${this.target} eyes glow red.`);
         }
       }
@@ -70,12 +69,16 @@ module.exports = class Blade extends Item {
       let deathSent = false;
 
       let customMessage = "";
-      if (this.actor.role == "Samurai"){
-        if ((this.actor.hp <= 50 && this.actor.hp >= 30) && !wellDoneSent) {
+      if (this.actor.role == "Samurai") {
+        if (this.actor.hp <= 50 && this.actor.hp >= 30 && !wellDoneSent) {
           customMessage = `You have done well so far... But that was just practice!`;
           this.game.queueAlert(customMessage);
           wellDoneSent = true;
-        } else if ((this.actor.hp <= 30 && this.actor.hp >= 20) && !criticalSent) {
+        } else if (
+          this.actor.hp <= 30 &&
+          this.actor.hp >= 20 &&
+          !criticalSent
+        ) {
           customMessage = "No more games, to the death!";
           this.game.queueAlert(customMessage);
           criticalSent = true;
