@@ -19,9 +19,8 @@ module.exports = class Blade extends Item {
             }
           },
         },
-      },
-    };
-  }
+      }
+    }
 };
 
 //Shows a list of moves samurai and their opponent can choose
