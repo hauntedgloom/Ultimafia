@@ -11,10 +11,10 @@ module.exports = class Blade extends Item {
         actionName: "Battle",
         states: ["Day"],
         flags: ["voting", "instant", "noVeg"],
-        action: { 
-          labels: ['blade', 'kill'],
+        action: {
+          labels: ["blade", "kill"],
           item: this,
-          run: this.run.bind(this)
+          run: this.run.bind(this),
         },
         performAction: this.performAction.bind(this),
         inputType: "custom",
@@ -110,10 +110,9 @@ module.exports = class Blade extends Item {
       turn++;
     }
     // If the actor or target died, set the winner
-    if (this.actor.data.hp > 0){
+    if (this.actor.data.hp > 0) {
       this.target.kill("basic", this.actor);
-    }
-    else{
+    } else {
       this.actor.kill("basic", this.target);
     }
 

@@ -14,7 +14,7 @@ module.exports = class GiveBlade extends Card {
 
     this.actor.data.def = 10;
     this.target.data.def = 10;
-    
+
     this.actor.data.crit = 1.0;
     this.target.data.crit = 1.0;
 
@@ -24,7 +24,7 @@ module.exports = class GiveBlade extends Card {
         flags: ["voting"],
         action: {
           labels: ["giveItem", "blade"],
-          priority:  PRIORITY_ITEM_GIVER_DEFAULT,
+          priority: PRIORITY_ITEM_GIVER_DEFAULT,
           run: function () {
             // Gives a blade to the samurai and their opponent
             this.actor.holdItem("Blade");
