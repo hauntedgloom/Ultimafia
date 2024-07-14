@@ -1,22 +1,22 @@
 const Item = require("../Item");
 
 module.exports = class Blade extends Item {
-  constructor(meetingName) {
+  constructor() {
     super("Blade");
     this.reveal = true;
-    this.meetingName = meetingName;
+    this.meetingName = "Use Move";
 
     this.meetings = {
-      [meetingName]: {
+      [this.meetingName]: {
         actionName: "Battle",
         states: ["Day"],
         flags: ["voting", "instant", "noVeg"],
         action: {
-          labels: ["blade", "kill"],
+          labels: ["kill", "blade"],
           item: this,
           run: this.run.bind(this),
+          performAction: this.performAction.bind(this),
         },
-        performAction: this.performAction.bind(this),
         inputType: "custom",
         targets: ["Attack", "Defend", "Charge"],
       },
