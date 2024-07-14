@@ -2292,13 +2292,13 @@ const roleData = {
       ],
     },
     Samurai: {
-      allignment: "Independent",
+      alignment: "Independent",
       description: [
         "Picks a player at night to enage in a turn based duel during the day once per game.",
         "Both the samurai and the target has the option to use the following moves: attack, defend, parry and charge.",
-        "Attack - Deals 15-20 damage.",
-        "Defend - Raises defense on the current turn. High chance of blocking a crit.",
-        "Charge - Raises the crit chance on the next turn",
+        "Attack - Deals a certain amount of damage.",
+        "Defend - Raises defense of the player.",
+        "Charge - Raises the attack power of the player.",
         "Wins if they win their duel.",
       ],
     },
