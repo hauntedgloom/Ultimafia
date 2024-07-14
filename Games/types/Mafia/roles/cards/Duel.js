@@ -22,7 +22,6 @@ module.exports = class Duel extends Card {
     this.actor.data.crit = 1.0;
     this.target.data.crit = 1.0;
 
-    /*
     this.listeners = {
       state: function (stateInfo) {
         if (!this.player.alive) {
@@ -37,10 +36,10 @@ module.exports = class Duel extends Card {
           "A samurai has come to town to prove their worth! Losing against them could bring disastrous consequences…"
         );
       },
-    };*/
+    };
 
     this.meetings = {
-      Duel: {
+      "Duel": {
         states: ["Night"],
         flags: ["voting"],
         action: {
