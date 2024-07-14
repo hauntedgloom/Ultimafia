@@ -8,7 +8,7 @@ module.exports = class Blade extends Item {
     this.meetingName = "Use Move";
 
     //Setting wincon variable
-    if (this.actor.role == "Samurai"){
+    if (this.actor.role == "Samurai") {
       this.actor.data.winner = "";
     }
 
