@@ -4,7 +4,6 @@ module.exports = class Duel extends Card {
   constructor(role) {
     super(role);
 
-    /*
     // Setting winner
     this.actor.data.winner = "";
 
@@ -21,7 +20,19 @@ module.exports = class Duel extends Card {
 
     // Setting crit
     this.actor.data.crit = 1.0;
-    this.target.data.crit = 1.0;*/
+    this.target.data.crit = 1.0;
+
+    this.listeners = {
+      roleAssigned: function (player) {
+        if (player !== this.player) {
+          return;
+        }
+
+        this.player.queueAlert(
+          "A samurai has come to town to prove their worth! Losing against them could bring disastrous consequences…"
+        );
+      }
+    };
 
     this.meetings = {
       Duel: {
@@ -30,9 +41,13 @@ module.exports = class Duel extends Card {
         flags: ["voting"],
         action: {
           labels: ["duel"],
+          shouldMeet: function () {
+            //If a battle happened, samurai can't pick again
+            return this.actor.data.hp == 150;
+          },
           run: function () {
-            //this.actor.holdItem("Blade");
-            //this.target.holdItem("Blade");
+            this.actor.holdItem("Blade");
+            this.target.holdItem("Blade");
           },
         },
       },
