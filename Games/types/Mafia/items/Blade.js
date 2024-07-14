@@ -36,10 +36,8 @@ let moves = [
         labels: ["kill", "attack"],
         run: function () {
           this.game.queueAlert(`${this.actor.name} uses slash.`);
-          if (this.dominates()) {
-            this.target.kill("basic", this.actor);
             this.actor.item.drop();
-          }
+            this.target.kill("basic", this.actor);
         },
       },
     },
